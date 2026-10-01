@@ -42,9 +42,10 @@ async def database_unavailable(request: Request, exc: OperationalError):
 
 @app.exception_handler(SQLAlchemyError)
 async def database_error(request: Request, exc: SQLAlchemyError):
-   logging.getLogger(__name__).exception("Database request failed: %s", exc)
+    logging.getLogger(__name__).exception("Database request failed: %s", exc)
     return JSONResponse(
-        status_code=500, content={"detail": "Unable to complete this database request."}
+        status_code=500,
+        content={"detail": "Unable to complete this database request."},
     )
 
 
